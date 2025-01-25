@@ -6,33 +6,47 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
+    [Header("Movement")]
+    [Tooltip("Movement speed of the character (except upwards)")]
     [SerializeField]
     [Range(1.0f,100.0f)]
     float speed = 0;
+    [Tooltip("Jump force of the character (decreasing until jump's apex)")]
     [SerializeField]
     [Range(1.0f,100.0f)]
     float jumpForce = 0;
+    [Tooltip("Gravity for the character (factor by which character's y position is decreased)")]
     [SerializeField]
     [Range(1.0f,100.0f)]
     float gravity = 0;
+    private Vector3 moveVector;
+    private float currJumpHeight = 0;
+    [Header("Interaction")]
+    [Tooltip("Maximum range that the player can interact with any object (recomended never more than character size times 2)")]
     [SerializeField]
-    [Range(1.0f,100.0f)]
-    float maxInteractionRange = 0;
+    [Range(0.5f,5.0f)]
+    float maxInteractionRange = 0.75f;
+    [Tooltip("Mouse Sensitivity, both vertically and horizontally")]
     [SerializeField]
     [Range(1.0f,10.0f)]
     float mouseSensitivity = 0;
     float yRotation = 0;
+    [Header("Pop Bubbles")]
     [HideInInspector]
-    bool ownsBubbles = false;
+    public bool ownsBubbles = false;
+    [Tooltip("Maximum number of bubbles (unused)")]
     [SerializeField]
     [Range(5,100)]
     private int currBubbles = 20;
-    private Vector3 moveVector;
-    private float currJumpHeight = 0;
-    private bool hasBubbleWrap = true;
+    [Tooltip("Only set true at start on Edit, not on final build")]
+    [SerializeField]
+    private bool hasBubbleWrap = false;
+    [Tooltip("Force with which the player is pushed backwads when poping a bubble")]
     [SerializeField]
     [Range(5.0f,10.0f)]
     private float burstForce = 5.0f;
+    private bool onBurstInteract = false;
+    [Tooltip("How many seconds must pass until the player can pop another bubble")]
     [Range(1.0f,5.0f)]
     public float popCooldown = 5.0f;
     private float currPopCD = 0.0f;
@@ -42,6 +56,8 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     private Material bubbleWrap;
     private Camera playerCamera;
+    private GameObject interactObjectList;
+    private GameObject freeObjectList;
 
 
      void Awake()
@@ -53,11 +69,12 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        controller = GetComponent<CharacterController>();
+        if(!controller) controller = GetComponent<CharacterController>();
         //bubbleWrap = transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Renderer>().material; // Where the first child is the canvas, the next is the pannel that anchors the object and the next is the gO
-        playerCamera = Camera.main;
-        wrappedObjectList = GameObject.Find("Wrapped Objects");
-
+        if(!playerCamera) playerCamera = Camera.main;
+        if(!wrappedObjectList) wrappedObjectList = GameObject.Find("WrappedObjects");
+        if(!interactObjectList) interactObjectList = GameObject.Find("InteractableObjects");
+        if(!freeObjectList) freeObjectList = GameObject.Find("FreeObjects");
     }
 
     // Update is called once per frame
@@ -91,35 +108,39 @@ public class PlayerController : MonoBehaviour
     }
 
     void Interact() {
-        // 
 
         if(Input.GetKeyDown("e")){
             Transform closest = null;
             
             // Package Interaction
-            foreach(Transform child in GameObject.Find("Interactable List").transform.GetChild(0).transform){ // Interactable List es una lista con todos los objetos con los que puede interactuar el jugador
+            foreach(Transform child in interactObjectList.transform){
                 // Packages
-                if((Vector3.Distance(child.transform.position, this.transform.position) < maxInteractionRange) && (closest == null || Vector3.Distance(child.transform.position, this.transform.position) < Vector3.Distance(closest.transform.position, this.transform.position))) closest = child;
+                if((Vector3.Distance(child.transform.position, this.transform.position) - (controller.radius*2) < maxInteractionRange) && (closest == null || Vector3.Distance(child.transform.position, this.transform.position) < Vector3.Distance(closest.transform.position, this.transform.position))) closest = child;
             }
 
             // Get Wrapping Papper
             if(closest != null) {
                 if (closest.name == "BubbleWrap") { hasBubbleWrap = true; closest.gameObject.SetActive(false); }
+                else Debug.Log(closest.name); // Activate Object Behaviour (Interactable)
             }
+            
         }
     }
 
     void PopBubble()
     {
+        // Play animation?
         if(hasBubbleWrap) {
             if(Input.GetMouseButtonDown(0)) { 
                 if(wrappedObjectList != null && wrappedObjectList.transform.childCount > 0) {
                     foreach(Transform wrappedObject in wrappedObjectList.transform){
-                        // Changing comparison value sets distance you can interact with the object (recomended never more than character size x2)
-                        if(Math.Abs(Vector3.Dot((this.transform.position - wrappedObject.position).normalized, this.transform.forward)) < 0.5f) { UnwrapObject(); break; }
+                        float isLookin = Vector3.Dot((wrappedObject.transform.position - transform.position).normalized, this.transform.forward);
+                        Debug.Log("Is" + (isLookin > 0.85 ? " " : " not ") + "looking at " + wrappedObject.name + " within " + isLookin + " at a distance of " + (Vector3.Distance(wrappedObject.transform.position, this.transform.position) - (controller.radius*2)) );
+                        if(isLookin > 0.85  && (Vector3.Distance(wrappedObject.transform.position, this.transform.position) - (controller.radius*2) < maxInteractionRange)) { UnwrapObject(wrappedObject); onBurstInteract = true; break; }
                     }
                 }
-                if(currPopCD < 0.1f) { MovementBurst(); currPopCD = popCooldown; } 
+                if(currPopCD < 0.1f && !onBurstInteract) { MovementBurst(); currPopCD = popCooldown; } 
+                onBurstInteract = false;
             }
 
             if(currPopCD >= 0.1f) currPopCD -= Time.deltaTime; 
@@ -128,14 +149,15 @@ public class PlayerController : MonoBehaviour
 
     void MovementBurst()
     {
-        Debug.Log("Burst");
         currJumpHeight = playerCamera.transform.forward.y*-burstForce/speed;
         onBurst = true;
     }
 
-    void UnwrapObject() 
+    void UnwrapObject(Transform other) 
     {
-        // Remove object from wrappedObjectsList and into freeObjectsList
-        // Set boolean on other obj
+        Debug.Log(other.name);
+        // Play animation
+        other.GetComponent<ObjectBehaviour>().unwrapped = true;
+        other.SetParent(freeObjectList.transform,true);
     }
 }

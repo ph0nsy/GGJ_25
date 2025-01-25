@@ -25,7 +25,7 @@ public class ObjectBehaviour : MonoBehaviour
     [Header("Behavior")]
     public bool moveOnStart = false;
     public bool loop = false;
-    public bool autoUnwrap = false;
+    // public bool autoUnwrap = false;
 
     [Header("Visibility Settings")]
     public Camera mainCamera;
