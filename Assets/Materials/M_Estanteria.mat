@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5980365406892135857
+--- !u!114 &-5016040651932023172
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -23,7 +23,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Pingu
+  m_Name: M_Estanteria
   m_Shader: {fileID: 4800000, guid: 6e4ae4064600d784cac1e41a9e6f2e59, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -53,7 +53,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorMap:
-        m_Texture: {fileID: 2800000, guid: 945b8aed90ed62044b5f5c5b13412359, type: 3}
+        m_Texture: {fileID: 2800000, guid: 60b64a90aafebbb4d8e9b7a7ebf75c9e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BentNormalMap:
@@ -65,7 +65,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: a3ea2c85eb9310b4cbe685212cf2c634, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1a3f0107875b082498bc0e5d84072758, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CoatMaskMap:
@@ -109,19 +109,19 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 945b8aed90ed62044b5f5c5b13412359, type: 3}
+        m_Texture: {fileID: 2800000, guid: 60b64a90aafebbb4d8e9b7a7ebf75c9e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
-        m_Texture: {fileID: 2800000, guid: 589e96e0dfa35d042a4b95fbd6ec7590, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5b70a18a94dfdae4cb3c7b358d1ab6bb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 18ee95638c4b5d04887a2a1d11054730, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2185cb4d5ea60524b96cd5ab721a582c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: a3ea2c85eb9310b4cbe685212cf2c634, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1a3f0107875b082498bc0e5d84072758, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMapOS:
@@ -129,7 +129,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: 01c41f620554de54fb20bcc2047a3889, type: 3}
+        m_Texture: {fileID: 2800000, guid: d58713c268146f045b3e8dd02f38dddd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
