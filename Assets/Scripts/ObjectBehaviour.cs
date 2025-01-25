@@ -161,6 +161,7 @@ public class ObjectBehaviour : MonoBehaviour
         }
         else
         {
+            SendMessage("SpawnVFX");
             BeginMovement();
         }
         yield return null;
