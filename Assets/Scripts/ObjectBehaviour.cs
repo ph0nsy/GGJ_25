@@ -11,15 +11,15 @@ public class ObjectBehaviour : MonoBehaviour
     public float movementDuration = 2f;
     public AnimationCurve easeCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
     [Tooltip("The left&uppermost value inside the room")]
-    public Transform maxValue;
+    public Transform maxValue; // Obligatorio (1)
     [Tooltip("The right&lowermost value inside the room")]
-    public Transform minValue;
+    public Transform minValue; // Obligatorio (1)
     [Tooltip("If left empty, it will set 4 points within the range.")]
-    public Vector3[] nextTargetPosition;
+    public Vector3[] nextTargetPosition; // [Alt to (1)] populate w/ 1 Vec3
     private Vector3 startPosition;
     private bool isMoving;
-    public Vector3 maxRotation;
-    public Vector3 minRotation;
+    public Vector3 maxRotation = new Vector3(30,30,-30); 
+    public Vector3 minRotation = new Vector3(-30,-30,30);
     public float rotationTime = 0.1f;
 
     [Header("Behavior")]
@@ -62,6 +62,8 @@ public class ObjectBehaviour : MonoBehaviour
         }
 
         nextTargetPosition[nextTargetPosition.Length - 1] = targetPosition;
+
+        // Create particle system (take prefab)
     }
 
     /// <summary>
@@ -161,8 +163,9 @@ public class ObjectBehaviour : MonoBehaviour
         }
         else
         {
-            SendMessage("SpawnVFX");
+            //SendMessage("SpawnVFX"); // Wait 4s (add) + Instantiate VFX prefab
             BeginMovement();
+
         }
         yield return null;
     }

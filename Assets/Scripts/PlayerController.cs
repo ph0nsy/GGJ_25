@@ -58,6 +58,9 @@ public class PlayerController : MonoBehaviour
     private Camera playerCamera;
     private GameObject interactObjectList;
     private GameObject freeObjectList;
+    private GameObject[] allObjects;
+    [Header("Animation")]
+    public Animator handAnimator;
 
 
      void Awake()
@@ -75,12 +78,14 @@ public class PlayerController : MonoBehaviour
         if(!wrappedObjectList) wrappedObjectList = GameObject.Find("WrappedObjects");
         if(!interactObjectList) interactObjectList = GameObject.Find("InteractableObjects");
         if(!freeObjectList) freeObjectList = GameObject.Find("FreeObjects");
+        if(allObjects == null) allObjects = GameObject.FindGameObjectsWithTag("Object");
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         Move();
+        CheckNearest();
         Interact();
         PopBubble();
     }
@@ -101,10 +106,31 @@ public class PlayerController : MonoBehaviour
         // Rotation
         // Vertical Rotation
         yRotation += -Input.GetAxis("Mouse Y") * mouseSensitivity;
-        playerCamera.transform.eulerAngles = new Vector3(Mathf.Clamp(yRotation, -60, 40), 0, 0);
+        playerCamera.transform.eulerAngles = new Vector3(Mathf.Clamp(yRotation, -88, 40), 0, 0);
         // Horizontal Rotation
         this.transform.eulerAngles = new Vector3(0, Input.GetAxis("Mouse X")*mouseSensitivity, 0) + this.transform.eulerAngles;
         playerCamera.transform.rotation = Quaternion.Euler(new Vector3(playerCamera.transform.eulerAngles.x, this.transform.eulerAngles.y, playerCamera.transform.eulerAngles.z));
+    }
+
+    void CheckNearest()
+    {
+        GameObject closest = null;
+        foreach(GameObject obj in allObjects) {
+            float isLookin = Vector3.Dot((obj.transform.position - transform.position).normalized, this.transform.forward);
+            float currDist =  Vector3.Distance(obj.transform.position, this.transform.position) - (controller.radius*2);
+            if(!closest && isLookin > 0.75f && currDist < maxInteractionRange) closest = obj;
+            else if(closest && isLookin > 0.75f && currDist < Vector3.Distance(this.transform.position, closest.transform.position)) closest = obj;
+        }
+        if(closest != null) {
+            Debug.Log("Closest: " + closest.name);
+
+            if (closest.transform.parent.name == interactObjectList.name) { this.transform.GetChild(1).GetChild(0).gameObject.SetActive(true); this.transform.GetChild(1).GetChild(1).gameObject.SetActive(false); }
+            if (closest.transform.parent.name == wrappedObjectList.name) { this.transform.GetChild(1).GetChild(1).gameObject.SetActive(true); this.transform.GetChild(1).GetChild(0).gameObject.SetActive(false); }
+        }
+        else {
+            this.transform.GetChild(1).GetChild(0).gameObject.SetActive(false);
+            this.transform.GetChild(1).GetChild(1).gameObject.SetActive(false);
+        }
     }
 
     void Interact() {
@@ -129,14 +155,14 @@ public class PlayerController : MonoBehaviour
 
     void PopBubble()
     {
-        // Play animation?
+        //if(handAnimator.GetBool("Popin")) handAnimator.SetBool("Popin", false);
         if(hasBubbleWrap) {
             if(Input.GetMouseButtonDown(0)) { 
+                handAnimator.SetBool("Popin", true);
                 if(wrappedObjectList != null && wrappedObjectList.transform.childCount > 0) {
                     foreach(Transform wrappedObject in wrappedObjectList.transform){
                         float isLookin = Vector3.Dot((wrappedObject.transform.position - transform.position).normalized, this.transform.forward);
-                        Debug.Log("Is" + (isLookin > 0.85 ? " " : " not ") + "looking at " + wrappedObject.name + " within " + isLookin + " at a distance of " + (Vector3.Distance(wrappedObject.transform.position, this.transform.position) - (controller.radius*2)) );
-                        if(isLookin > 0.85  && (Vector3.Distance(wrappedObject.transform.position, this.transform.position) - (controller.radius*2) < maxInteractionRange)) { UnwrapObject(wrappedObject); onBurstInteract = true; break; }
+                        if(isLookin > 0.75  && (Vector3.Distance(wrappedObject.transform.position, this.transform.position) - (controller.radius*2) < maxInteractionRange)) { UnwrapObject(wrappedObject); onBurstInteract = true; break; }
                     }
                 }
                 if(currPopCD < 0.1f && !onBurstInteract) { MovementBurst(); currPopCD = popCooldown; } 
@@ -149,6 +175,7 @@ public class PlayerController : MonoBehaviour
 
     void MovementBurst()
     {
+        // Modify Satisfaction Bar
         currJumpHeight = playerCamera.transform.forward.y*-burstForce/speed;
         onBurst = true;
     }

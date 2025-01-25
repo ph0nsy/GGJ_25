@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 6458800}
   m_Layer: 0
   m_Name: A_01
-  m_TagString: Untagged
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 11389788}
   m_Layer: 0
   m_Name: A_02
-  m_TagString: Untagged
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -348,7 +348,7 @@ GameObject:
   - component: {fileID: 144814028}
   m_Layer: 0
   m_Name: BubbleWrap
-  m_TagString: Untagged
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -457,7 +457,7 @@ GameObject:
   - component: {fileID: 218927433}
   m_Layer: 0
   m_Name: B_03
-  m_TagString: Untagged
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -682,7 +682,7 @@ GameObject:
   - component: {fileID: 455565064}
   m_Layer: 0
   m_Name: B_01
-  m_TagString: Untagged
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -984,7 +984,7 @@ GameObject:
   - component: {fileID: 1225586844}
   m_Layer: 0
   m_Name: B_02
-  m_TagString: Untagged
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1638,7 +1638,7 @@ GameObject:
   - component: {fileID: 1723358629}
   m_Layer: 0
   m_Name: A_03
-  m_TagString: Untagged
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1948,6 +1948,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2973468648870954920, guid: 33dfbb3fc078f334fb2a38913979be74, type: 3}
+      propertyPath: m_Name
+      value: P_Bubbles_Anchor
+      objectReference: {fileID: 0}
     - target: {fileID: 3261019918077211857, guid: 33dfbb3fc078f334fb2a38913979be74, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3
@@ -1987,6 +1991,10 @@ PrefabInstance:
     - target: {fileID: 4988565496145459748, guid: 33dfbb3fc078f334fb2a38913979be74, type: 3}
       propertyPath: m_LocalPosition.z
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5997203150149255060, guid: 33dfbb3fc078f334fb2a38913979be74, type: 3}
+      propertyPath: m_Name
+      value: P_Hand_Anchor
       objectReference: {fileID: 0}
     - target: {fileID: 6226690264660761888, guid: 33dfbb3fc078f334fb2a38913979be74, type: 3}
       propertyPath: m_Name
@@ -2044,12 +2052,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7681239275140768416, guid: 33dfbb3fc078f334fb2a38913979be74, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9129774704654083448, guid: 33dfbb3fc078f334fb2a38913979be74, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: b739a3f02ff77bf48b7636e64c3e3b4c, type: 2}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2973468648870954920, guid: 33dfbb3fc078f334fb2a38913979be74, type: 3}
+    - {fileID: 5997203150149255060, guid: 33dfbb3fc078f334fb2a38913979be74, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33dfbb3fc078f334fb2a38913979be74, type: 3}
