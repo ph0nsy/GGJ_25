@@ -1,0 +1,56 @@
+using UnityEditor;
+using UnityEditor.PackageManager;
+using UnityEngine;
+using UnityEngine.Profiling;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.HighDefinition;
+using UnityEngine.UI;
+
+
+public class VarManager : MonoBehaviour
+{
+
+    public Slider SatisfactionVar;
+    float timeRemaining;
+    public float maxTime = 20.0f;
+    public GameObject globalVolume;
+    private CustomPostProcessVolumeComponent color;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        //clonedProfile = Instantiate(globalVolume.profile);
+        timeRemaining = maxTime;
+        //globalVolume.profile = clonedProfile;
+        //clonedProfile.TryGet<ColorAdjustments>(out color);
+        //color = Instantiate(color);
+        //globalVolume = Camera.main.GetComponentInChildren<Volume>();
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (timeRemaining > 0)
+        {
+            timeRemaining -= Time.deltaTime;
+            SatisfactionVar.value = timeRemaining / maxTime;
+            //color = globalVolume.GetComponent<CustomPostProcessVolumeComponent>().;
+            //clonedProfile.TryGet<ColorAdjustments>(out color);
+            if (color != null)
+            {
+                // mappedValue = targetMin + (value-sourceMin) * (targetMax - targetMin) / (sourceMax - sourceMin)
+                // 100 = 200x
+                // 100 - 0 == 100x - -100x
+                // 
+                //color.Override();
+                //color.saturation.value = SatisfactionVar.value*100;
+                //clonedProfile.components[0] = color; 
+            }
+            else
+            {
+
+            }
+        }
+    }
+}
