@@ -155,22 +155,27 @@ public class PlayerController : MonoBehaviour
 
     void PopBubble()
     {
-        //if(handAnimator.GetBool("Popin")) handAnimator.SetBool("Popin", false);
         if(hasBubbleWrap) {
             if(Input.GetMouseButtonDown(0)) { 
                 handAnimator.SetBool("Popin", true);
-                if(wrappedObjectList != null && wrappedObjectList.transform.childCount > 0) {
-                    foreach(Transform wrappedObject in wrappedObjectList.transform){
-                        float isLookin = Vector3.Dot((wrappedObject.transform.position - transform.position).normalized, this.transform.forward);
-                        if(isLookin > 0.75  && (Vector3.Distance(wrappedObject.transform.position, this.transform.position) - (controller.radius*2) < maxInteractionRange)) { UnwrapObject(wrappedObject); onBurstInteract = true; break; }
-                    }
-                }
-                if(currPopCD < 0.1f && !onBurstInteract) { MovementBurst(); currPopCD = popCooldown; } 
-                onBurstInteract = false;
+                StartCoroutine(PopLogic());
             }
 
             if(currPopCD >= 0.1f) currPopCD -= Time.deltaTime; 
         }
+    }
+
+    IEnumerator PopLogic(){
+        yield return new WaitForSeconds(0.5f);
+        if(wrappedObjectList != null && wrappedObjectList.transform.childCount > 0) {
+            foreach(Transform wrappedObject in wrappedObjectList.transform){
+                float isLookin = Vector3.Dot((wrappedObject.transform.position - transform.position).normalized, this.transform.forward);
+                if(isLookin > 0.75  && (Vector3.Distance(wrappedObject.transform.position, this.transform.position) - (controller.radius*2) < maxInteractionRange)) { UnwrapObject(wrappedObject); onBurstInteract = true; break; }
+            }
+        }
+        if(currPopCD < 0.1f && !onBurstInteract) { MovementBurst(); currPopCD = popCooldown; } 
+        onBurstInteract = false;
+        handAnimator.SetBool("Popin", false);
     }
 
     void MovementBurst()

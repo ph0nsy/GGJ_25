@@ -1,2 +1,16 @@
 fileFormatVersion: 2
 guid: 94e941da3f8958646aaaf601f06c04f6
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - maxValue: {instanceID: 0}
+  - minValue: {instanceID: 0}
+  - mainCamera: {instanceID: 0}
+  - vfx_prefab: {instanceID: 0}
+  - endDestroy_prefab: {fileID: 3909764698177221778, guid: fcdb5f19d46ad7c40a4931123b53ff97, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

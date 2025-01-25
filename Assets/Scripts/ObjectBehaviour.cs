@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.VFX;
 
 public class ObjectBehaviour : MonoBehaviour
 {
@@ -32,6 +33,8 @@ public class ObjectBehaviour : MonoBehaviour
     public float checkInterval = 1f;
     public float chanceToToggle = 0.1f; // 10% chance
     public bool quantic = false;
+    public VisualEffectObject vfx_prefab;
+    public GameObject endDestroy_prefab;
 
     [Header("Wrapping")]
     public bool unwrapped = false;
@@ -62,8 +65,8 @@ public class ObjectBehaviour : MonoBehaviour
         }
 
         nextTargetPosition[nextTargetPosition.Length - 1] = targetPosition;
-
-        // Create particle system (take prefab)
+    
+        Instantiate(endDestroy_prefab, this.transform); 
     }
 
     /// <summary>
@@ -163,7 +166,8 @@ public class ObjectBehaviour : MonoBehaviour
         }
         else
         {
-            //SendMessage("SpawnVFX"); // Wait 4s (add) + Instantiate VFX prefab
+            Destroy (Instantiate(vfx_prefab, this.transform), 10.0f);
+            yield return new WaitForSeconds(4.0f); 
             BeginMovement();
 
         }
