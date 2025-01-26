@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Profiling;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -19,6 +20,7 @@ public class VarManager : MonoBehaviour
     public float decreaseRatio = 0.5f;
 
     public float thresholdValue = 0.5f;
+    public SceneLoader sceneManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -63,12 +65,9 @@ public class VarManager : MonoBehaviour
                 globalVolume0.GetComponent<Volume>().weight =  1 - SatisfactionVar.value/thresholdValue;
             }
                 
-                
-            /*}
-            else
-            {
-
-            }*/
+        }
+        else {
+            sceneManager.ReloadCurrentScene();
         }
     }
 }

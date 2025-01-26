@@ -6,6 +6,7 @@ public class IO_EndDoor : InteractableObject
     public int sisterScene_idx = 3;
 
     public override void Action(){ 
-        SceneManager.LoadScene(sisterScene_idx);
-     }
+        if(this.transform.parent.childCount <= 1) SceneManager.LoadScene(sisterScene_idx);
+        else Debug.Log("No está todo desbloqueado");
+    }
 }

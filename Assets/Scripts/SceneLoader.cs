@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     public GameObject transitionOut;
+    public GameObject transitionOutGameOver;
     public void LoadScene(string sceneName)
     {
         StartCoroutine(LoadAsyncScene(sceneName));
@@ -16,8 +17,8 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
     IEnumerator LoadAsyncScene(int sceneIdx){
-        transitionOut.SetActive(true);
-        yield return new WaitForSeconds(1.0f);
+        transitionOutGameOver.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene(sceneIdx);
     }
 
