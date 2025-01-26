@@ -19,7 +19,7 @@ public class IO_Evelator : InteractableObject
         this.GetComponent<Animator>().enabled = true;
         float tempTime = time;
         while(tempTime > 0){
-            platform.transform.position += new Vector3(0, heightMax*Time.deltaTime, 0);
+            platform.transform.position += new Vector3(0, heightMax*Time.deltaTime/time, 0);
             tempTime -= Time.deltaTime;
         }
         yield return null;
@@ -29,8 +29,8 @@ public class IO_Evelator : InteractableObject
         this.GetComponent<Animator>().enabled = true;
         float tempTime = 0;
         while(tempTime < time){
-            other.transform.position += new Vector3(0, heightMax*Time.deltaTime, 0);
-            platform.transform.position += new Vector3(0, heightMax*Time.deltaTime, 0);
+            other.transform.position += new Vector3(0, heightMax*Time.deltaTime/time, 0);
+            platform.transform.position += new Vector3(0, heightMax*Time.deltaTime/time, 0);
             tempTime += Time.deltaTime;
         }
 
