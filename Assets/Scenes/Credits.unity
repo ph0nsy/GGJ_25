@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creditsContent: {fileID: 1361247177}
-  scrollDuration: 5
+  scrollDuration: 15
   startPosition: {x: 0, y: -1077}
   endPosition: {x: 0, y: 950}
   mainMenuSceneName: MainMenu
