@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Audio;
 
 
 public class PlayerController : MonoBehaviour
@@ -66,7 +67,9 @@ public class PlayerController : MonoBehaviour
     [Header("Satisfaction Bar")]
     [Range(0.05f,0.5f)]
     public float addPercentage = 0.35f;
-
+    [Header("Sound")]
+    public AudioResource[] resources;
+    public AudioSource source;
 
      void Awake()
      {
@@ -164,6 +167,7 @@ public class PlayerController : MonoBehaviour
     {
         if(hasBubbleWrap) {
             if(Input.GetMouseButtonDown(0)) { 
+                source.resource =  resources[UnityEngine.Random.Range(0,3)];
                 handAnimator.SetBool("Popin", true);
                 StartCoroutine(PopLogic());
             }
@@ -173,6 +177,7 @@ public class PlayerController : MonoBehaviour
     }
 
     IEnumerator PopLogic(){
+        source.Play();
         yield return new WaitForSeconds(0.5f);
         handAnimator.SetBool("Popin", false);
         if(wrappedObjectList != null && wrappedObjectList.transform.childCount > 0) {

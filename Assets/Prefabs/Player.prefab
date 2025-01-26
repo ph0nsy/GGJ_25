@@ -361,6 +361,7 @@ GameObject:
   - component: {fileID: 1997563493656927540}
   - component: {fileID: 7668535192435283318}
   - component: {fileID: 7017131620170113314}
+  - component: {fileID: 6949772738665024035}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -512,6 +513,108 @@ MonoBehaviour:
   popCooldown: 0.75
   handAnimator: {fileID: 2569185643002698924}
   addPercentage: 0.35
+  resources:
+  - {fileID: 8300000, guid: e476058f5433539439a62a1797e03044, type: 3}
+  - {fileID: 8300000, guid: fab3c95ae1b0cd14fb4c6ec5eaf5a0c5, type: 3}
+  - {fileID: 8300000, guid: d33311c22c5286145aea524ea85c9165, type: 3}
+  - {fileID: 8300000, guid: 8935d3d9a1f9b5146baea73af6dd2c96, type: 3}
+--- !u!82 &6949772738665024035
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824591808383058403}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &981195287062719722
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,6 +760,7 @@ MonoBehaviour:
   globalVolume1: {fileID: 5809356226599987532}
   decreaseRatio: 0.5
   thresholdValue: 0.5
+  sceneManager: {fileID: 0}
 --- !u!1 &3486110823773323341
 GameObject:
   m_ObjectHideFlags: 0
@@ -1294,6 +1398,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6087894695353151531}
     m_Modifications:
+    - target: {fileID: -7511558181221131132, guid: cb97e3bf9b4380e4a9090e4619932671, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: cb97e3bf9b4380e4a9090e4619932671, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9380d40b1adc1814e97fc1399c9d4edf, type: 2}
     - target: {fileID: -8679921383154817045, guid: 5d96fc747f7697948a93564f484785c0, type: 3}
       propertyPath: m_LocalScale.x
       value: 220
@@ -1358,14 +1470,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: cb97e3bf9b4380e4a9090e4619932671, type: 3}
-      propertyPath: m_StaticShadowCaster
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: cb97e3bf9b4380e4a9090e4619932671, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 9380d40b1adc1814e97fc1399c9d4edf, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
