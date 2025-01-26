@@ -16,9 +16,15 @@ public class CrateManager : MonoBehaviour
         // Create and position the boxes
         for (int i = 0; i < numberOfBoxes; i++)
         {
-            Debug.Log(start.position + ", " + end.position);
-            float zPos = Random.Range(start.position.z+1, end.position.z-1);
-            GameObject box = Instantiate(boxPrefab, new Vector3 (start.position.x, start.position.y, zPos), Quaternion.identity);
+            GameObject box;
+            if (i == 0)
+            {
+                box = Instantiate(boxPrefab, start.position, Quaternion.identity);
+            }
+            else
+            {
+                box = Instantiate(boxPrefab, new Vector3(start.position.x, start.position.y, start.position.z + i * 0.75f), Quaternion.identity);
+            }
             boxes.Add(box);
         }
     }
