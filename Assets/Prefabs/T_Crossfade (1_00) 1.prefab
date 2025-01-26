@@ -65,9 +65,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Asta la poya de k te traten como huna basura. Travaja mas, tavaja m\xE1s.
-    \n\nEl jefe:\n- Puto negro quieres cobrar unos 5 miseros euros m\xE1s. Pues trabaja
-    burbujas\n\n- HUH?"
+  m_text: "Felicidades! Despu\xE9s de tus 10 a\xF1os de duro trabajo, hemos decidido
+    compensarte con creces tu actitud y esfuerzo con un aumento de un 2% en tu sueldo!\n\nNo
+    olvides volver ma\xF1ana a trabajar con tu mejor versi\xF3n."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

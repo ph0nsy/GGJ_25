@@ -7178,9 +7178,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2946653a1397d06438df8ab672afbcd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  jumpForce: 10
-  gravity: 10
+  speed: 5
+  jumpForce: 5
+  gravity: 9
   maxInteractionRange: 1
   mouseSensitivity: 10
   ownsBubbles: 0
