@@ -132,7 +132,6 @@ public class PlayerController : MonoBehaviour
             else if(closest && isLookin > 0.75f && currDist < Vector3.Distance(this.transform.position, closest.transform.position)) closest = obj;
         }
         if(closest != null) {
-            Debug.Log("Closest: " + closest.name);
 
             if (closest.transform.parent.name == interactObjectList.name) { this.transform.GetChild(1).GetChild(0).gameObject.SetActive(true); this.transform.GetChild(1).GetChild(1).gameObject.SetActive(false); }
             if (closest.transform.parent.name == wrappedObjectList.name) { this.transform.GetChild(1).GetChild(1).gameObject.SetActive(true); this.transform.GetChild(1).GetChild(0).gameObject.SetActive(false); }
@@ -152,6 +151,13 @@ public class PlayerController : MonoBehaviour
             foreach(Transform child in interactObjectList.transform){
                 // Packages
                 if((Vector3.Distance(child.transform.position, this.transform.position) - (controller.radius*2) < maxInteractionRange) && (closest == null || Vector3.Distance(child.transform.position, this.transform.position) < Vector3.Distance(closest.transform.position, this.transform.position))) closest = child;
+                if(child.childCount > 0 && child.name == "BubbleWrap"){
+                    foreach(Transform child_2 in interactObjectList.transform){
+                        // Packages
+                        if((Vector3.Distance(child_2.transform.position, this.transform.position) - (controller.radius*2) < maxInteractionRange) && (closest == null || Vector3.Distance(child_2.transform.position, this.transform.position) < Vector3.Distance(closest.transform.position, this.transform.position))) closest = child;
+                    }
+                
+                }
             }
 
             // Get Wrapping Papper
@@ -167,7 +173,7 @@ public class PlayerController : MonoBehaviour
     {
         if(hasBubbleWrap) {
             if(Input.GetMouseButtonDown(0)) { 
-                source.resource =  resources[UnityEngine.Random.Range(0,3)];
+                source.resource = resources[UnityEngine.Random.Range(0,3)];
                 handAnimator.SetBool("Popin", true);
                 StartCoroutine(PopLogic());
             }

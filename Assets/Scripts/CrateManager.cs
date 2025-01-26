@@ -19,11 +19,11 @@ public class CrateManager : MonoBehaviour
             GameObject box;
             if (i == 0)
             {
-                box = Instantiate(boxPrefab, start.position, Quaternion.identity);
+                box = Instantiate(boxPrefab, start.position, Quaternion.identity, this.transform);
             }
             else
             {
-                box = Instantiate(boxPrefab, new Vector3(start.position.x, start.position.y, start.position.z + i * 0.75f), Quaternion.identity);
+                box = Instantiate(boxPrefab, new Vector3(start.position.x, start.position.y, start.position.z + i * 0.75f), Quaternion.identity, this.transform);
             }
             boxes.Add(box);
         }

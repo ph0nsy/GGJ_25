@@ -8,7 +8,7 @@ public class IO_Evelator : InteractableObject
     public AudioSource sound;
     public override void Action(){
         sound.Play();
-        Collider[] colliders = Physics.OverlapSphere(transform.position, transform.GetComponent<BoxCollider>().size.y*2, LayerMask.GetMask("Player"));
+        Collider[] colliders = Physics.OverlapSphere(platform.transform.position, platform.transform.GetComponent<BoxCollider>().size.y*2, LayerMask.GetMask("Player"));
         foreach(Collider hitCollider in colliders){
             if(hitCollider.gameObject.name == "Player") StartCoroutine(Elevator(2.5f, hitCollider.gameObject));
         }
@@ -19,7 +19,7 @@ public class IO_Evelator : InteractableObject
         this.GetComponent<Animator>().enabled = true;
         float tempTime = time;
         while(tempTime > 0){
-            platform.transform.position += new Vector3(0, heightMax*Time.deltaTime*time, 0);
+            platform.transform.position += new Vector3(0, heightMax*Time.deltaTime, 0);
             tempTime -= Time.deltaTime;
         }
         yield return null;
@@ -29,8 +29,8 @@ public class IO_Evelator : InteractableObject
         this.GetComponent<Animator>().enabled = true;
         float tempTime = 0;
         while(tempTime < time){
-            other.transform.position += new Vector3(0, heightMax*Time.deltaTime*time, 0);
-            platform.transform.position += new Vector3(0, heightMax*Time.deltaTime*time, 0);
+            other.transform.position += new Vector3(0, heightMax*Time.deltaTime, 0);
+            platform.transform.position += new Vector3(0, heightMax*Time.deltaTime, 0);
             tempTime += Time.deltaTime;
         }
 
