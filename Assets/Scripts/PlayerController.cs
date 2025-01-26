@@ -154,7 +154,7 @@ public class PlayerController : MonoBehaviour
             // Get Wrapping Papper
             if(closest != null) {
                 if (closest.name == "BubbleWrap") { hasBubbleWrap = true; closest.gameObject.SetActive(false); handGO.transform.GetChild(2).gameObject.SetActive(true); }
-                else Debug.Log(closest.name); // Activate Object Behaviour (Interactable)
+                else closest.GetComponent<InteractableObject>().Action() ; // Activate Object Behaviour (Interactable)
             }
             
         }
