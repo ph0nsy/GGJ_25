@@ -47,8 +47,8 @@ public class PlayerController : MonoBehaviour
     private float burstForce = 5.0f;
     private bool onBurstInteract = false;
     [Tooltip("How many seconds must pass until the player can pop another bubble")]
-    [Range(1.0f,5.0f)]
-    public float popCooldown = 5.0f;
+    [Range(0.75f,5.0f)]
+    public float popCooldown = 1.0f;
     private float currPopCD = 0.0f;
     private bool onBurst = false;
 
@@ -61,6 +61,11 @@ public class PlayerController : MonoBehaviour
     private GameObject[] allObjects;
     [Header("Animation")]
     public Animator handAnimator;
+    private GameObject handGO;
+    private GameObject barraScript;
+    [Header("Satisfaction Bar")]
+    [Range(0.05f,0.5f)]
+    public float addPercentage = 0.35f;
 
 
      void Awake()
@@ -79,6 +84,8 @@ public class PlayerController : MonoBehaviour
         if(!interactObjectList) interactObjectList = GameObject.Find("InteractableObjects");
         if(!freeObjectList) freeObjectList = GameObject.Find("FreeObjects");
         if(allObjects == null) allObjects = GameObject.FindGameObjectsWithTag("Object");
+        if(!handGO) handGO = transform.GetChild(0).GetChild(0).gameObject;
+        if(!barraScript) barraScript = transform.GetChild(1).GetChild(2).gameObject;
     }
 
     // Update is called once per frame
@@ -106,7 +113,7 @@ public class PlayerController : MonoBehaviour
         // Rotation
         // Vertical Rotation
         yRotation += -Input.GetAxis("Mouse Y") * mouseSensitivity;
-        playerCamera.transform.eulerAngles = new Vector3(Mathf.Clamp(yRotation, -88, 40), 0, 0);
+        playerCamera.transform.eulerAngles = new Vector3(Mathf.Clamp(yRotation, -45, 45), 0, 0);
         // Horizontal Rotation
         this.transform.eulerAngles = new Vector3(0, Input.GetAxis("Mouse X")*mouseSensitivity, 0) + this.transform.eulerAngles;
         playerCamera.transform.rotation = Quaternion.Euler(new Vector3(playerCamera.transform.eulerAngles.x, this.transform.eulerAngles.y, playerCamera.transform.eulerAngles.z));
@@ -146,7 +153,7 @@ public class PlayerController : MonoBehaviour
 
             // Get Wrapping Papper
             if(closest != null) {
-                if (closest.name == "BubbleWrap") { hasBubbleWrap = true; closest.gameObject.SetActive(false); }
+                if (closest.name == "BubbleWrap") { hasBubbleWrap = true; closest.gameObject.SetActive(false); handGO.transform.GetChild(2).gameObject.SetActive(true); }
                 else Debug.Log(closest.name); // Activate Object Behaviour (Interactable)
             }
             
@@ -167,6 +174,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator PopLogic(){
         yield return new WaitForSeconds(0.5f);
+        handAnimator.SetBool("Popin", false);
         if(wrappedObjectList != null && wrappedObjectList.transform.childCount > 0) {
             foreach(Transform wrappedObject in wrappedObjectList.transform){
                 float isLookin = Vector3.Dot((wrappedObject.transform.position - transform.position).normalized, this.transform.forward);
@@ -175,12 +183,12 @@ public class PlayerController : MonoBehaviour
         }
         if(currPopCD < 0.1f && !onBurstInteract) { MovementBurst(); currPopCD = popCooldown; } 
         onBurstInteract = false;
-        handAnimator.SetBool("Popin", false);
     }
+
 
     void MovementBurst()
     {
-        // Modify Satisfaction Bar
+        barraScript.GetComponent<VarManager>().timeRemaining = barraScript.GetComponent<VarManager>().timeRemaining + (addPercentage*barraScript.GetComponent<VarManager>().timeRemaining);
         currJumpHeight = playerCamera.transform.forward.y*-burstForce/speed;
         onBurst = true;
     }

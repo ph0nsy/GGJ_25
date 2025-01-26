@@ -11,11 +11,12 @@ public class VarManager : MonoBehaviour
 {
 
     public Slider SatisfactionVar;
-    float timeRemaining;
+    public float timeRemaining;
     public float maxTime = 20.0f;
     public GameObject globalVolume0;
     public GameObject globalVolume1;
     private CustomPostProcessVolumeComponent color;
+    public float decreaseRatio = 0.5f;
 
     public float thresholdValue = 0.5f;
 
@@ -37,7 +38,7 @@ public class VarManager : MonoBehaviour
     {
         if (timeRemaining > 0)
         {
-            timeRemaining -= Time.deltaTime;
+            timeRemaining -= decreaseRatio*Time.deltaTime;
             SatisfactionVar.value = timeRemaining / maxTime;
             //color = globalVolume.GetComponent<CustomPostProcessVolumeComponent>().;
             //clonedProfile.TryGet<ColorAdjustments>(out color);
