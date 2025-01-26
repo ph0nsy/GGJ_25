@@ -229,7 +229,7 @@ Material:
     - _SpecularAAScreenSpaceVariance: 0.1
     - _SpecularAAThreshold: 0.2
     - _SpecularOcclusionMode: 1
-    - _Speed: 4
+    - _Speed: 0.01
     - _SrcBlend: 1
     - _StencilRef: 0
     - _StencilRefDepth: 1
