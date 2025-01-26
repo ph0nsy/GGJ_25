@@ -525,7 +525,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6226690264660761888}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -838,6 +838,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MANO
       objectReference: {fileID: 0}
+    - target: {fileID: 1311480349054532265, guid: c9028b9f90c5a004cb6d4c0d6ec4defc, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4ee63e3211c47b24e965c79c3d6e85d2, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
