@@ -183,8 +183,7 @@ public class ObjectBehaviour : MonoBehaviour
             nextTargetPosition[i] = new Vector3(
                 UnityEngine.Random.Range(minValue.position.x, maxValue.position.x),
                 UnityEngine.Random.Range(minValue.position.y, maxValue.position.y),
-                UnityEngine.Random.Range(minValue.position.z, maxValue.position.z)
-            );
+                UnityEngine.Random.Range(minValue.position.z, maxValue.position.z));
         }
     }
 
